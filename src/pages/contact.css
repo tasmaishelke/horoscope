@@ -1,0 +1,16 @@
+.class-title-container
+{
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgb(255, 255, 255);
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0px;
+}
+
+.class-title-container h1
+{
+    font-size: 50px;
+}
