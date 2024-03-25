@@ -1,31 +1,32 @@
-.class-title-container
+.class-home-container
 {
     width: 100%;
-    min-height: 100vh;
+    max-height: 200px;
     background-color: rgb(255, 255, 255);
+    background-position: center;
     background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 0px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 5rem;
 }
 
-.class-title
+.class-home-title
 {
     color: rgb(0, 0, 0);
     text-align: center;
     max-width: 800px;
 }
 
-.class-title h1
+.class-home-title h1
 {
-    font-size: 50px;
+    font-size: 40px;
+    margin-bottom: 30px;
 }
 
-.class-title p
+.class-home-title p
 {
     max-width: 800px;
-    margin: 10px auto 20px;
-    line-height: 2;
+    line-height: 1.5;
 }
-

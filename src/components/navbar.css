@@ -1,49 +1,101 @@
-
-nav
-{
-   width: 100%;
-   background: rgb(0, 0, 0);
-   color: rgb(255, 255, 255);
-   padding: 20px;
-   position: fixed;
-   top: 0px;
-   left: 0px;
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-   z-index: 10;
-
-
+.active{
+    background-color: #70747f;
 }
 
-.class-website-name
-{
-    font-size: 30px;
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    position: sticky;
+    top: 0;
+    background: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    padding: 1rem;
 }
 
-nav ul
-{
+.class-website-name {
+    font-size: 2rem;
+    margin: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+nav ul {
+    display: flex;
     list-style: none;
     display:flex;
     gap: 20px;
     font-size: 20px;
 }
 
-nav ul li
-{
-    display: inline-block;
+nav ul li {
+   list-style: none; 
+   display: inline-block;
     list-style: none;
     margin: 5px 10px;
 }
 
-.class-navbar-button
-{
-    background-color: gray;
-    color: #212121;
-    padding: 15px 20px;
-    font-size: 15px;
-    border: 0px;
-    outline: 0px;
-    border-radius: 30px;
-    cursor: pointer;
+nav ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    padding: 0.5rem;
+    margin: 0 0.5rem;
+    border-radius: 0.5rem;
+}
+
+nav ul li a:not(.active):hover {
+    background-color:#353844 ;
+}
+
+nav .menu {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
+}
+
+nav .menu span {
+    height: 0.4rem;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 0.2rem;
+}
+
+
+@media (max-width: 735px) {
+    nav .menu {
+        display: flex;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    nav ul.open {
+        display: flex;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        margin: 0.2rem 0.5rem;
+    }
 }

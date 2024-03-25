@@ -1,22 +1,33 @@
-import {Link} from 'react-router-dom'
-import './navbar.css'
+import React, { useState } from "react";
+import "./navbar.css";
+import { NavLink } from "react-router-dom";
 
-function Navbar(){
+const Navbar = () => 
+{
+    const [menuOpen, setMenuOpen] = useState(false);
     return(
-        <nav className="container">
-            <h1 className="class-website-name">Horoscope</h1>
-                <ul>
+       
+
+        <nav>
+            <h1 className="class-website-name"> Horoscope </h1>
+            <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul className={menuOpen ? "open" : ""}>
                     <li> 
-                        <Link to="/"> Home </Link> 
+                        <NavLink to="/">Home</NavLink>
                     </li>
                     <li> 
-                        <Link to="/about"> About </Link> 
+                        <NavLink to="/about"> About </NavLink> 
                     </li>
                     <li> 
-                        <Link to="/contact"> Contact </Link> 
+                        <NavLink to="/contact"> Contact </NavLink> 
                     </li>
                     <li> 
-                       <button className="class-navbar-button"> <Link to="/login"> Login </Link>  </button>
+                    <NavLink to="/login"> Login </NavLink> 
+
                     </li>
                 </ul>
         </nav>        
@@ -24,3 +35,11 @@ function Navbar(){
 }
 
 export default Navbar
+
+
+
+
+
+
+
+

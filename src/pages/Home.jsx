@@ -5,15 +5,17 @@ function Home()
 {
     return(
         <>
-            <div className="class-title-container">
-                <div className='class-title'>
+            <div className="class-home-container">
+                <div className='class-home-title'>
                     <h1>
                         Welcome to Horoscope
                     </h1>
                     <p>
-                        Where Universe decides your fate
-                    </p>
+                        Where universe decides your fate
+                    </p>                                    
+
                 </div>
+                
             </div> 
             <Login />      
         </>         
