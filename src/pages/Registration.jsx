@@ -4,7 +4,7 @@ import './registration.css'
 
 function Registration()
 {
-    const [firstName, setFirstName] = useState('')
+    const [fullName, setFullName] = useState('')
     const [birthPlace, setBirthPlace] = useState('')
     const [gender, setGender] = useState('')
     const [birthday, setBirthday] = useState('')
@@ -14,7 +14,7 @@ function Registration()
     const details = (e) =>
     {
         e.preventDefault()
-        console.log(firstName)
+        console.log(fullName)
         console.log(birthPlace)
         console.log(gender)
         console.log(birthday)
@@ -35,7 +35,20 @@ function Registration()
                    
                     
                     <div className="input">
-                        <input value={firstName} onChange={(e) => setFirstName(e.target.value)} type="text" id="firstName" placeholder="First Name" name="firstName" />                        
+                    <p>Enter Full name</p> 
+
+                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} type="text" id="fullName" placeholder="Full Name" name="fullName" />                        
+                        <FaUser className="icon" />
+                    </div>
+
+                    <div className="input">    
+                    <p>Enter time in 24HR Format</p> 
+                    <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthdaytime" required name="birthdaytime"></input>
+                    </div>
+
+                    <div className="input">
+                    <p>Enter the Location</p> 
+                        <input value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="text" id="birthPlace" placeholder="Birth Place" name="birthPlace" />                        
                         <FaUser className="icon" />
                     </div>
 
@@ -46,23 +59,17 @@ function Registration()
                         </select>               
                     </div>
 
-                    <div className='input-radio'>
+                    <div className='input'>
+
                         <select value={location} onChange={(e) => setLocation(e.target.value)} id='location' name="location">
+                        <option value="nonIndian">Non-Indian</option>
                             <option value="indian">Indian</option>
-                            <option value="nonIndian">Non-Indian</option>
                         </select>
                     </div>
                  
 
-                    <div className="input">    
-                    <p>The time is in 24 HR Format</p> 
-                    <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthdaytime" required name="birthdaytime"></input>
-                    </div>
-
-                    <div className="input">
-                        <input value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="search" id="birthPlace" placeholder="Birth Place" name="birthPlace" />                        
-                        <FaUser className="icon" />
-                    </div>
+                    
+            
 
                     <button className="class-kundli-button" type="submit" > Get-Kundli </button>
 
