@@ -46,6 +46,13 @@
   border-radius: 10px;
 }
 
+.input select
+{
+  color: rgb(0, 0, 0);
+  width: 5rem;
+  
+}
+
 .class-registration-form input::placeholder
 {
    color: rgb(0, 0, 0);
@@ -62,27 +69,11 @@
   color: rgb(0, 0, 0);
 }
 
-.class-login-link p
-{
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-size: 15px;
-    align-items: center;
-    justify-content: center;
-}
 
-.class-login-link a
-{
-    text-align: center;
-    color: rgb(0, 0, 0);
-    font-size: 15px;
-    align-items: center;
-    justify-content: center;
-    text-decoration: underline;
-    font-weight: 700;
-}
 
-.class-registration-button
+
+
+.class-kundli-button
 {
   padding: 10px;
   border: 1px solid;

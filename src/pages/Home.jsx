@@ -1,6 +1,5 @@
 import './home.css'
-import Login from '../pages/Login'
-
+import Registration from './Registration';
 function Home()
 {
     return(
@@ -17,7 +16,7 @@ function Home()
                 </div>
                 
             </div> 
-            <Login />      
+            <Registration />      
         </>         
     );
 }
