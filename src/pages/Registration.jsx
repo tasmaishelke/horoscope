@@ -6,7 +6,6 @@ function Registration()
 {
     const [fullName, setFullName] = useState('')
     const [birthPlace, setBirthPlace] = useState('')
-    const [gender, setGender] = useState('')
     const [birthday, setBirthday] = useState('')
     const [location, setLocation] = useState('')
 
@@ -16,7 +15,6 @@ function Registration()
         e.preventDefault()
         console.log(fullName)
         console.log(birthPlace)
-        console.log(gender)
         console.log(birthday)
         console.log(location)
 
@@ -27,55 +25,58 @@ function Registration()
 
     return(
         <>
-            <div className="class-registration-form">
+        <div className='class-parent-container'>
+
+            <div className="form-container">
+            <h1>Kundli / Birth Chart</h1>
+            <h3>Enter Birth Details</h3>
                 <form onSubmit={details}>
-                    <h1>Kundli / Birth Chart</h1>
-                    <h3>Enter Birth Details</h3>
-                    
-                   
-                    
-                    <div className="input">
-                    <p>Enter Full name</p> 
-
-                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} type="text" id="fullName" placeholder="Full Name" name="fullName" />                        
-                        <FaUser className="icon" />
+                    <div className="form-group">
+                        <label htmlFor="name">Name:</label>
+                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} type="text" id="name" name="name" required placeholder="Your full name" /> 
                     </div>
 
-                    <div className="input">    
-                    <p>Enter time in 24HR Format</p> 
-                    <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthdaytime" required name="birthdaytime"></input>
+                    <div className="form-group">
+                        <label htmlFor="birthday">Birthday:</label>
+                        <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthday" name="birthday" required />
                     </div>
 
-                    <div className="input">
-                    <p>Enter the Location</p> 
-                        <input value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="text" id="birthPlace" placeholder="Birth Place" name="birthPlace" />                        
-                        <FaUser className="icon" />
+                    <div className="form-group gender-container">
+                        <div>
+                            <input type="radio" id="male" name="gender" value="male" required/>
+                                <label htmlFor="male">Male</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="female" name="gender" value="female" required/>
+                                <label htmlFor="female">Female</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="other" name="gender" value="other" required/>
+                                <label htmlFor="other">Other</label>
+                        </div>
                     </div>
 
-                    <div className="input">                        
-                        <select value={gender} onChange={(e) => setGender(e.target.value)} id='gender' name="gender">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>               
+                    <div className="form-group">
+                        <label htmlFor="birthplace">Birthplace:</label>
+                        <input value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="text" id="birthplace" name="birthplace" required placeholder="City, Country" />
                     </div>
 
-                    <div className='input'>
-
-                        <select value={location} onChange={(e) => setLocation(e.target.value)} id='location' name="location">
-                        <option value="nonIndian">Non-Indian</option>
+                    <div className="form-group">
+                        <label htmlFor="nationality">Nationality:</label>
+                        <select value={location} onChange={(e) => setLocation(e.target.value)} id="nationality" name="nationality">
                             <option value="indian">Indian</option>
+                            <option value="non-indian">Non-Indian</option>
                         </select>
                     </div>
-                 
 
-                    
-            
-
-                    <button className="class-kundli-button" type="submit" > Get-Kundli </button>
-
-                    
+                    <input type="submit" value="Get-Kundli" />
                 </form>
-            </div>                
+            </div>
+
+        </div>
+
+                    
+                        
         </>
     )
 }
