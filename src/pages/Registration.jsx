@@ -6,6 +6,7 @@ function Registration()
 {
     const [fullName, setFullName] = useState('')
     const [birthPlace, setBirthPlace] = useState('')
+    const [gender, setGender] = useState('')
     const [birthday, setBirthday] = useState('')
     const [location, setLocation] = useState('')
 
@@ -14,8 +15,9 @@ function Registration()
     {
         e.preventDefault()
         console.log(fullName)
-        console.log(birthPlace)
         console.log(birthday)
+        console.log(gender)
+        console.log(birthPlace)
         console.log(location)
 
 
@@ -41,19 +43,13 @@ function Registration()
                         <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthday" name="birthday" required />
                     </div>
 
-                    <div className="form-group gender-container">
-                        <div>
-                            <input type="radio" id="male" name="gender" value="male" required/>
-                                <label htmlFor="male">Male</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="female" name="gender" value="female" required/>
-                                <label htmlFor="female">Female</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="other" name="gender" value="other" required/>
-                                <label htmlFor="other">Other</label>
-                        </div>
+                    <div className="form-group">
+                        <label htmlFor="gender">Gender:</label>
+                        <select value={gender} onChange={(e) => setGender(e.target.value)} id="gender" name="gender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
 
                     <div className="form-group">
