@@ -14,13 +14,14 @@
 .class-registration-form form
 {
   border: 2px solid;
-  padding: 30px;
+  padding: 2rem;
   border-radius: 30px;
+  color: rgb(19, 148, 148);
 }
 
 .class-registration-form h1
 {
-  font-size: 40px;
+  font-size: 2.5rem;
   text-align: center;
   color: rgb(0, 0, 0);
   margin-bottom: 50px;
@@ -30,7 +31,7 @@
 {
   
   position: relative;
-  height: 50px;
+  height: 4rem;
   width: 100%;
   margin: 20px 0px;
 }
@@ -40,7 +41,7 @@
   width: 100%;
   height: 100%;
   color: rgb(0, 0, 0);
-  font-size: 20px;
+  font-size: 1.2rem;
   padding: 5px; 
   border: 1px solid;
   border-radius: 10px;
@@ -56,7 +57,7 @@
 .class-registration-form input::placeholder
 {
    color: rgb(0, 0, 0);
-   font-size: 15px;
+   font-size: 1rem;
 }
 
 .class-registration-form .icon
@@ -65,7 +66,7 @@
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 1rem;
   color: rgb(0, 0, 0);
 }
 
