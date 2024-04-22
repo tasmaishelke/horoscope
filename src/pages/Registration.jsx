@@ -1,28 +1,58 @@
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react';
 import { FaUser, FaLock } from "react-icons/fa";
 import './registration.css'
+import axios from 'axios';
 
 function Registration()
 {
     const [fullName, setFullName] = useState('')
-    const [birthPlace, setBirthPlace] = useState('')
+    // const [birthPlace, setBirthPlace] = useState('')
     const [gender, setGender] = useState('')
     const [birthday, setBirthday] = useState('')
-    const [location, setLocation] = useState('')
-
-    
+    const [location, setLocation] = useState('')    
     const details = (e) =>
     {
         e.preventDefault()
-        console.log(fullName)
-        console.log(birthday)
-        console.log(gender)
-        console.log(birthPlace)
         console.log(location)
-
-
-
     }
+
+    const [firstKeyValueOptions, setFirstKeyValueOptions] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        const urlOne = 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/IndiaLocations.json';
+        const urlTwo = 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/WorldLocations.json';
+    
+        Promise.all([axios.get(urlOne), axios.get(urlTwo)])
+      .then(results => {
+        const [dataOne, dataTwo] = results.map(response => response.data);
+
+        // Extracting the first key-value pair from each item
+        const extractFirstKeyValue = data => data.map(item => {
+          const [firstKey] = Object.keys(item);
+          return { key: firstKey, value: item[firstKey] };
+        });
+
+        const combinedData = [
+          ...extractFirstKeyValue(dataOne),
+          ...extractFirstKeyValue(dataTwo)
+        ];
+
+        const sortedOptions = combinedData.sort((a, b) => a.key.localeCompare(b.key));
+        
+        setFirstKeyValueOptions(sortedOptions);
+        
+        setLoading(false);
+      })
+      .catch(err => {
+        setError('Failed to fetch data');
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (!firstKeyValueOptions.length) return <div>No options available</div>;
 
 
     return(
@@ -52,16 +82,19 @@ function Registration()
                         </select>
                     </div>
 
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label htmlFor="birthplace">Birthplace:</label>
                         <input value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="text" id="birthplace" name="birthplace" required placeholder="City, Country" />
-                    </div>
+                    </div> */}
 
                     <div className="form-group">
-                        <label htmlFor="nationality">Nationality:</label>
-                        <select value={location} onChange={(e) => setLocation(e.target.value)} id="nationality" name="nationality">
-                            <option value="indian">Indian</option>
-                            <option value="non-indian">Non-Indian</option>
+                        <label htmlFor="location">Location:</label>
+                        <select value={location} onChange={(e) => setLocation(e.target.value)} id="location" name="location">
+                            {firstKeyValueOptions.map((option, index) => (
+                            <option key={index} value={option.value}>
+                                {option.value}
+                            </option>
+                            ))}
                         </select>
                     </div>
 
