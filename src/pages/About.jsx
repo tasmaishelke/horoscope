@@ -27,8 +27,11 @@ function About()
           ...extractFirstKeyValue(dataOne),
           ...extractFirstKeyValue(dataTwo)
         ];
+
+        const sortedOptions = combinedData.sort((a, b) => a.key.localeCompare(b.key));
         
-        setFirstKeyValueOptions(combinedData);
+        setFirstKeyValueOptions(sortedOptions);
+        
         setLoading(false);
       })
       .catch(err => {
@@ -43,15 +46,15 @@ function About()
     
       return (
         <div>
-      <h1>First Key-Value Pair Dropdown</h1>
-      <select>
-        {firstKeyValueOptions.map((option, index) => (
-          <option key={index} value={option.value}>
-            {option.key}: {option.value}
-          </option>
-        ))}
-      </select>
-    </div>
+            <h1>First Key-Value Pair Dropdown</h1>
+            <select>
+                {firstKeyValueOptions.map((option, index) => (
+                <option key={index} value={option.value}>
+                    {option.value}
+                </option>
+                ))}
+            </select>
+        </div>
       );
     }
 export default About
