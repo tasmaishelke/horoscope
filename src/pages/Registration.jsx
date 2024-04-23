@@ -6,53 +6,61 @@ import axios from 'axios';
 function Registration()
 {
     const [fullName, setFullName] = useState('')
+    const [email, setEmail] = useState('')
+
     // const [birthPlace, setBirthPlace] = useState('')
     const [gender, setGender] = useState('')
     const [birthday, setBirthday] = useState('')
     const [location, setLocation] = useState('')    
+    const [nationality, setNationality] = useState('')    
+   
+
     const details = (e) =>
     {
         e.preventDefault()
+        console.log(fullName)
+        console.log(email)
+        console.log(gender)
+        console.log(birthday)
         console.log(location)
+        console.log(nationality)
+
+       
+
+       
     }
 
-    const [firstKeyValueOptions, setFirstKeyValueOptions] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [dataOption, setDataOption] = useState('data1'); // State to track selected API data
+    const [dropdownOptions, setDropdownOptions] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    // Define the API URLs
+    const apiUrls = {
+        data1: 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/IndiaLocations.json',
+      data2: 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/WorldLocations.json'
+    };
+
     useEffect(() => {
-        const urlOne = 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/IndiaLocations.json';
-        const urlTwo = 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/WorldLocations.json';
-    
-        Promise.all([axios.get(urlOne), axios.get(urlTwo)])
-      .then(results => {
-        const [dataOne, dataTwo] = results.map(response => response.data);
+        const fetchData = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const url = apiUrls[dataOption]; // Select URL based on dataOption
+                const response = await axios.get(url);
+                const firstKeyValuePairs = response.data.map(item => {
+                    const [firstKey] = Object.keys(item);
+                    return { key: firstKey, value: item[firstKey] };
+                });
+                setDropdownOptions(firstKeyValuePairs);
+            } catch (error) {
+                setError('Failed to fetch data');
+            }
+            setLoading(false);
+        };
 
-        // Extracting the first key-value pair from each item
-        const extractFirstKeyValue = data => data.map(item => {
-          const [firstKey] = Object.keys(item);
-          return { key: firstKey, value: item[firstKey] };
-        });
-
-        const combinedData = [
-          ...extractFirstKeyValue(dataOne),
-          ...extractFirstKeyValue(dataTwo)
-        ];
-
-        const sortedOptions = combinedData.sort((a, b) => a.key.localeCompare(b.key));
-        
-        setFirstKeyValueOptions(sortedOptions);
-        
-        setLoading(false);
-      })
-      .catch(err => {
-        setError('Failed to fetch data');
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!firstKeyValueOptions.length) return <div>No options available</div>;
+        fetchData();
+    }, [dataOption]);
 
 
     return(
@@ -69,6 +77,11 @@ function Registration()
                     </div>
 
                     <div className="form-group">
+                        <label htmlFor="email">Email:</label>
+                        <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" id="email" name="email" required placeholder="name@gmail.com" /> 
+                    </div>
+
+                    <div className="form-group">
                         <label htmlFor="birthday">Birthday:</label>
                         <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthday" name="birthday" required />
                     </div>
@@ -82,21 +95,42 @@ function Registration()
                         </select>
                     </div>
 
-                    {/* <div className="form-group">
-                        <label htmlFor="birthplace">Birthplace:</label>
-                        <input value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="text" id="birthplace" name="birthplace" required placeholder="City, Country" />
-                    </div> */}
+                
 
-                    <div className="form-group">
-                        <label htmlFor="location">Location:</label>
-                        <select value={location} onChange={(e) => setLocation(e.target.value)} id="location" name="location">
-                            {firstKeyValueOptions.map((option, index) => (
-                            <option key={index} value={option.value}>
-                                {option.value}
-                            </option>
-                            ))}
-                        </select>
-                    </div>
+                    <div>
+                            <div>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="data1"
+                                        checked={dataOption === 'data1'}
+                                        onChange={() => setDataOption('data1')}
+                                    />
+                                    Indian
+                                </label>
+                                <label>
+                                    <input
+                                        type="radio"
+                                        value="data2"
+                                        checked={dataOption === 'data2'}
+                                        onChange={() => setDataOption('data2')}
+                                    />
+                                    Non-Indian
+                                </label>
+                            </div>
+                            {loading && <div>Loading...</div>}
+                            {error && <div>Error: {error}</div>}
+                            {!loading && !error && (
+                                <select value={location} onChange={(e) => setLocation(e.target.value)} id="location" name="location">
+
+                                    {dropdownOptions.map((option, index) => (
+                                        <option key={index} value={option.value}>
+                                            {option.key}: {option.value}
+                                        </option>
+                                    ))}
+                                </select>
+                            )}
+                        </div>
 
                     <input type="submit" value="Get-Kundli" />
                 </form>

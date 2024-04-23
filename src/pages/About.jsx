@@ -5,56 +5,73 @@ import axios from 'axios';
 
 function About()
 {
-    
-    const [firstKeyValueOptions, setFirstKeyValueOptions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    useEffect(() => {
-        const urlOne = 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/IndiaLocations.json';
-        const urlTwo = 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/WorldLocations.json';
-    
-        Promise.all([axios.get(urlOne), axios.get(urlTwo)])
-      .then(results => {
-        const [dataOne, dataTwo] = results.map(response => response.data);
+  const [dataOption, setDataOption] = useState('data1'); // State to track selected API data
+  const [dropdownOptions, setDropdownOptions] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-        // Extracting the first key-value pair from each item
-        const extractFirstKeyValue = data => data.map(item => {
-          const [firstKey] = Object.keys(item);
-          return { key: firstKey, value: item[firstKey] };
-        });
+  // Define the API URLs
+  const apiUrls = {
+      data1: 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/IndiaLocations.json',
+      data2: 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/WorldLocations.json'
+  };
 
-        const combinedData = [
-          ...extractFirstKeyValue(dataOne),
-          ...extractFirstKeyValue(dataTwo)
-        ];
+  useEffect(() => {
+      const fetchData = async () => {
+          setLoading(true);
+          setError(null);
+          try {
+              const url = apiUrls[dataOption]; // Select URL based on dataOption
+              const response = await axios.get(url);
+              const firstKeyValuePairs = response.data.map(item => {
+                  const [firstKey] = Object.keys(item);
+                  return { key: firstKey, value: item[firstKey] };
+              });
+              setDropdownOptions(firstKeyValuePairs);
+          } catch (error) {
+              setError('Failed to fetch data');
+          }
+          setLoading(false);
+      };
 
-        const sortedOptions = combinedData.sort((a, b) => a.key.localeCompare(b.key));
-        
-        setFirstKeyValueOptions(sortedOptions);
-        
-        setLoading(false);
-      })
-      .catch(err => {
-        setError('Failed to fetch data');
-        setLoading(false);
-      });
-  }, []);
+      fetchData();
+  }, [dataOption]); // Dependency array includes dataOption to refetch when it changes
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!firstKeyValueOptions.length) return <div>No options available</div>;
-    
-      return (
-        <div>
-            <h1>First Key-Value Pair Dropdown</h1>
-            <select>
-                {firstKeyValueOptions.map((option, index) => (
-                <option key={index} value={option.value}>
-                    {option.value}
-                </option>
-                ))}
-            </select>
-        </div>
-      );
-    }
+  return (
+      <div>
+          <div>
+              <label>
+                  <input
+                      type="radio"
+                      value="data1"
+                      checked={dataOption === 'data1'}
+                      onChange={() => setDataOption('data1')}
+                  />
+                  Indian
+              </label>
+              <label>
+                  <input
+                      type="radio"
+                      value="data2"
+                      checked={dataOption === 'data2'}
+                      onChange={() => setDataOption('data2')}
+                  />
+                  Non-Indian
+              </label>
+          </div>
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error}</div>}
+          {!loading && !error && (
+              <select>
+                  {dropdownOptions.map((option, index) => (
+                      <option key={index} value={option.value}>
+                          {option.key}: {option.value}
+                      </option>
+                  ))}
+              </select>
+          )}
+      </div>
+  );
+}
+
 export default About
