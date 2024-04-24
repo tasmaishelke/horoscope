@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function Registration()
 {
-    const [fullName, setFullName] = useState('')
+    const [fullname, setFullName] = useState('')
     const [gender, setGender] = useState('')
     const [birthday, setBirthday] = useState('')
     const [location, setLocation] = useState('')    
@@ -16,11 +16,10 @@ function Registration()
     const details = (e) =>
     {
         e.preventDefault()
-        navigate('/kundli');
-        console.log(fullName)
-        console.log(gender)
-        console.log(birthday)
-        console.log(location)
+        //navigate('/kundli');
+        const details = {fullname, gender, birthday, location}
+        console.log(details);
+        
 
        
 
@@ -71,7 +70,7 @@ function Registration()
                 <form onSubmit={details}>
                     <div className="form-group">
                         <label htmlFor="name">Name:</label>
-                        <input value={fullName} onChange={(e) => setFullName(e.target.value)} type="text" id="name" name="name" required placeholder="Your full name" /> 
+                        <input value={fullname} onChange={(e) => setFullName(e.target.value)} type="text" id="name" name="name" required placeholder="Your full name" /> 
                     </div>
 
         
