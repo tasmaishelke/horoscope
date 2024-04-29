@@ -16,7 +16,7 @@ function Registration()
     const details = (e) =>
     {
         e.preventDefault()
-        //navigate('/kundli');
+        navigate('/kundli');
         const details = {fullname, gender, birthday, location}
         console.log(details);
         
@@ -123,7 +123,8 @@ function Registration()
                             )}
                         </div>
 
-                    <button type="submit">Get-Kundli</button>
+                    <button className="button" type="submit">Get-Kundli</button>
+                    
                 </form>
             </div>
 
