@@ -5,73 +5,77 @@ import axios from 'axios';
 
 function About()
 {
-  const [dataOption, setDataOption] = useState('data1'); // State to track selected API data
-  const [dropdownOptions, setDropdownOptions] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  // Define the API URLs
-  const apiUrls = {
-      data1: 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/IndiaLocations.json',
-      data2: 'https://horoscope-4b2b3-default-rtdb.asia-southeast1.firebasedatabase.app/WorldLocations.json'
-  };
-
-  useEffect(() => {
-      const fetchData = async () => {
-          setLoading(true);
-          setError(null);
-          try {
-              const url = apiUrls[dataOption]; // Select URL based on dataOption
-              const response = await axios.get(url);
-              const firstKeyValuePairs = response.data.map(item => {
-                  const [firstKey] = Object.keys(item);
-                  return { key: firstKey, value: item[firstKey] };
-              });
-              setDropdownOptions(firstKeyValuePairs);
-          } catch (error) {
-              setError('Failed to fetch data');
-          }
-          setLoading(false);
-      };
-
-      fetchData();
-  }, [dataOption]); // Dependency array includes dataOption to refetch when it changes
-
-  return (
-      <div>
-          <div>
-              <label>
-                  <input
-                      type="radio"
-                      value="data1"
-                      checked={dataOption === 'data1'}
-                      onChange={() => setDataOption('data1')}
-                  />
-                  Indian
-              </label>
-              <label>
-                  <input
-                      type="radio"
-                      value="data2"
-                      checked={dataOption === 'data2'}
-                      onChange={() => setDataOption('data2')}
-                  />
-                  Non-Indian
-              </label>
-          </div>
-          {loading && <div>Loading...</div>}
-          {error && <div>Error: {error}</div>}
-          {!loading && !error && (
-              <select>
-                  {dropdownOptions.map((option, index) => (
-                      <option key={index} value={option.value}>
-                          {option.key}: {option.value}
-                      </option>
-                  ))}
-              </select>
-          )}
-      </div>
-  );
+    return(
+    <svg width="350" height="350" id="chartSvg">
+      <g>
+      <path d="M0,0L175,0L87.5,87.5L0,0" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M175,0L350,0L262.5,87.5L175,0" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M0,0L87.5,87.5L0,175L0,0" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M175,0L87.5,87.5L175,175L262.5,87.5L175,0" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M350,0L262.5,87.5L350,175L350,0" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M0,175L87.5,87.5L175,175L87.5,262.5L0,175" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M175,175L262.5,87.5L350,175L262.5,262.5L175,175" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M0,175L87.5,262.5L0,350L0,175" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M87.5,262.5L175,175L262.5,262.5L175,350L87.5,262.5" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M262.5,262.5L350,175L350,350L262.5,262.5" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M0,350L87.5,262.5L175,350L0,350" stroke="#666" stroke-width="2" fill="none"></path>
+      <path d="M175,350L262.5,262.5L350,350L175,350" stroke="#666" stroke-width="2" fill="none"></path>
+      <text font-size="20px">Sun</text><text font-size="12.5px">11</text>
+      <text font-size="12.5px" x="168.5078125" y="140" >6</text>
+      <text font-size="12.5px" x="81.0078125" y="52.5" >7</text>
+      <text font-size="12.5px" x="52.5" y="80.5" >8</text>
+      <text font-size="12.5px" x="81.0078125" y="227.5" >9</text>
+      <text font-size="12.5px" x="52.5" y="255.5" >10</text>
+      <text font-size="12.5px" x="81.0078125" y="297.5" >11</text>
+      <text font-size="12.5px" x="168.5078125" y="210" >12</text>
+      <text font-size="12.5px" x="256.0078125" y="297.5" >1</text>
+      <text font-size="12.5px" x="288.75" y="255.5" >2</text>
+      <text font-size="12.5px" x="256.0078125" y="227.5" >3</text>
+      <text font-size="12.5px" x="288.75" y="80.5" >4</text>
+      <text font-size="12.5px" x="256.0078125" y="52.5" >5</text>
+      <text font-size="11.666666666666666px"></text><text font-size="11.666666666666666px">Su </text>
+      <text font-size="11.666666666666666px" x="167.61144256591797" y="87.5" >Su </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px"> </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px"> </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px"> </text>
+      <text font-size="11.666666666666666px">Me Ve </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px" x="70.71456909179688" y="17.5" >Me Ve </text>
+      <text font-size="11.666666666666666px">Ma </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px" x="254.14356994628906" y="17.5" >Ma </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px"> </text>
+      <text font-size="11.666666666666666px"></text>
+      <text font-size="11.666666666666666px"> </text>
+      <text font-size="11.666666666666666px">Mo </text>
+      <text font-size="11.666666666666666px" x="8.75" y="72.5" >Mo </text>
+      <text font-size="11.666666666666666px" x="8.75" y="92.5" ></text>
+      <text font-size="11.666666666666666px" x="8.75" y="112.5" ></text>
+      <text font-size="11.666666666666666px" x="8.75" y="52.5" ></text>
+      <text font-size="11.666666666666666px">Ke </text>
+      <text font-size="11.666666666666666px" x="8.75" y="247.5" >Ke </text>
+      <text font-size="11.666666666666666px" x="8.75" y="267.5" ></text>
+      <text font-size="11.666666666666666px" x="8.75" y="287.5" ></text>
+      <text font-size="11.666666666666666px" x="8.75" y="227.5" ></text>
+      <text font-size="11.666666666666666px">Ra </text>
+      <text font-size="11.666666666666666px" x="341.25" y="72.5" text-anchor="end" >Ra </text>
+      <text font-size="11.666666666666666px" x="341.25" y="92.5" text-anchor="end" ></text>
+      <text font-size="11.666666666666666px" x="341.25" y="112.5" text-anchor="end" ></text>
+      <text font-size="11.666666666666666px" x="341.25" y="52.5" text-anchor="end" ></text>
+      <text font-size="11.666666666666666px">Ju Sa </text>
+      <text font-size="11.666666666666666px" x="341.25" y="247.5" text-anchor="end" >Ju Sa </text>
+      <text font-size="11.666666666666666px" x="341.25" y="267.5" text-anchor="end" ></text>
+      <text font-size="11.666666666666666px" x="341.25" y="287.5" text-anchor="end" ></text>
+      <text font-size="11.666666666666666px" x="341.25" y="227.5" text-anchor="end" ></text>
+      </g>
+      </svg>
+    )
 }
+
+
 
 export default About
