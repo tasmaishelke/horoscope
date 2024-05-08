@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaUser, FaLock } from "react-icons/fa";
 import './registration.css'
 import axios from 'axios';
 
+
 function Registration()
 {
-    const [fullname, setFullName] = useState('')
-    const [gender, setGender] = useState('')
-    const [birthday, setBirthday] = useState('')
-    const [location, setLocation] = useState('')    
+  
+    const [formData, setFormData] = useState({
+        name: '',
+        gender: '',
+        birthday: '',
+        location: '',
+      });
    
-    const navigate = useNavigate();
-
-    const details = (e) =>
+    const onChangeHandler = (event) =>
     {
-        e.preventDefault()
-        navigate('/kundli');
-        const details = {fullname, gender, birthday, location}
-        console.log(details);
-        
-
-       
-
-       
+        setFormData(() =>
+        ({...formData, [event.target.name] : event.target.value}))
     }
+    
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(formData);
+        navigate('/about', { state: { formData } });
+    };
+
 
     const [dataOption, setDataOption] = useState('data1'); // State to track selected API data
     const [dropdownOptions, setDropdownOptions] = useState([]);
@@ -60,6 +60,7 @@ function Registration()
 
 
 
+
     return(
         <>
         <div className='class-parent-container'>
@@ -67,21 +68,21 @@ function Registration()
             <div className="form-container">
             <h1>Kundli / Birth Chart</h1>
             <h3>Enter Birth Details</h3>
-                <form onSubmit={details}>
+               <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="name">Name:</label>
-                        <input value={fullname} onChange={(e) => setFullName(e.target.value)} type="text" id="name" name="name" required placeholder="Your full name" /> 
+                        <input value={formData.name} onChange={onChangeHandler} type="text" id="name" name="name" required placeholder="Your full name" /> 
                     </div>
 
         
                     <div className="form-group">
                         <label htmlFor="birthday">Birthday:</label>
-                        <input value={birthday} onChange={(e) => setBirthday(e.target.value)} type="datetime-local" id="birthday" name="birthday" required />
+                        <input value={formData.birthday} onChange={onChangeHandler} type="datetime-local" id="birthday" name="birthday" required />
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="gender">Gender:</label>
-                        <select value={gender} onChange={(e) => setGender(e.target.value)} id="gender" name="gender">
+                        <select value={formData.gender} onChange={onChangeHandler} id="gender" name="gender">
                             <option value="other">Other</option>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -112,7 +113,7 @@ function Registration()
                             {loading && <div>Loading...</div>}
                             {error && <div>Error: {error}</div>}
                             {!loading && !error && (
-                                <select value={location} onChange={(e) => setLocation(e.target.value)} id="location" name="location">
+                                <select value={formData.location} onChange={onChangeHandler} id="location" name="location">
 
                                     {dropdownOptions.map((option, index) => (
                                         <option key={index} value={option.value}>
