@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './registration.css'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function Registration()
@@ -19,10 +20,11 @@ function Registration()
         ({...formData, [event.target.name] : event.target.value}))
     }
     
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
-        navigate('/about', { state: { formData } });
+        navigate('/about', { state: { ...formData } });
     };
 
 

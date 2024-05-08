@@ -1,14 +1,25 @@
 import './about.css'
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Database from './database';
+import { useLocation } from 'react-router-dom';
 
 
 function About()
 {
+
+  const locations = useLocation();
+  const { name, gender,  birthday, location} = locations.state;
+
     return(
       <>
-      <Database />
+      <div className='userdetails'>
+        <h3>User Details</h3>
+        <p>Name: {name}</p>
+        <p>gender: {gender}</p>
+        <p>birthday: {birthday}</p>
+        <p>location: {location}</p>      
+    </div>
+
     <div>
         <svg width="350" height="350" id="chartSvg">
           <g>
